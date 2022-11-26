@@ -80,7 +80,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            @if ($product->count()==0)
+                            @if ($products->count()==0)
                                 <tr>
                                     <td class="text-center" colspan="4">No data found</td>
                                 </tr>
@@ -106,7 +106,7 @@
                                 @endif
                                 <label class="form-label">Category</label>
                                 <select name="category_id" class="form-control">
-                                    <option value="">--select category--</option>
+                                    <option value="">--Select category--</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                                     @endforeach
@@ -115,7 +115,7 @@
                             <div class="form-group mb-3">
                                 <label class="form-label">Subcategory</label>
                                 <select name="subcategory_id" class="form-control">
-                                    <option value="">--select subcategory--</option>
+                                    <option value="">--Select subcategory--</option>
                                     @foreach ($subcategories as $subcategory)
                                         <option value="{{ $subcategory->id }}">{{ $subcategory->subcategory_name }}</option>
                                     @endforeach
