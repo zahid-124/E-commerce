@@ -4,20 +4,27 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Auth::routes();
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//Frontend
+Route::get('/', [FrontendController::class, 'main']);
+Route::get('/product/details/{product_id}', [FrontendController::class, 'product_details']);
 
 Route::get('/contact', function(){
     return view('contact');
 });
 
-Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 

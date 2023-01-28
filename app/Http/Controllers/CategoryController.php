@@ -7,6 +7,7 @@ use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Validation\Rules\Password;
 use App\Http\Requests\CategoryPost;
+use App\Models\Subcategory;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -36,6 +37,7 @@ class CategoryController extends Controller
         //         'category_name.required'=>'name plzz',
         //     ]
         // );
+        
         Category::insert([
             'category_name'=>$request->category_name,
             'added_by'=>Auth::id(),
@@ -57,6 +59,7 @@ class CategoryController extends Controller
 
     function forcedelete($category_id){
         Category::withTrashed()->find($category_id)->forceDelete();
+        Subcategory::where('category_id', $category_id)->forcedelete();
         return back()->with('forcedelsuccess', 'Category permanant delete successfull!');
     }
 }

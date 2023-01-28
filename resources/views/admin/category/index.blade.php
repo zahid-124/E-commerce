@@ -115,13 +115,22 @@
                             </div>
                         @endif
 
-                        <form action="{{ url('/category/insert') }}" method="POST">
+                        <form action="{{ url('/category/insert') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label">Category Name</label>
                                 <input type="text" class="form-control" name="category_name">
                             </div>
                             @error('category_name')
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="mb-3">
+                                <label class="form-label">Category Image</label>
+                                <input type="file" class="form-control" name="category_image">
+                            </div>
+                            @error('category_image')
                                 <div class="alert alert-danger">
                                     {{ $message }}
                                 </div>
