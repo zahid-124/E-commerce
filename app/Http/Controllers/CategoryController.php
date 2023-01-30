@@ -9,6 +9,7 @@ use Illuminate\Validation\Rules\Password;
 use App\Http\Requests\CategoryPost;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\Auth;
+use Image;
 
 
 class CategoryController extends Controller
@@ -37,11 +38,20 @@ class CategoryController extends Controller
         //         'category_name.required'=>'name plzz',
         //     ]
         // );
-        
-        Category::insert([
+
+        $id = Category::insertGetId([
             'category_name'=>$request->category_name,
             'added_by'=>Auth::id(),
             'created_at'=>Carbon::now(),
+        ]);
+
+        $image=$request->category_image;
+        $extension=$image->getClientOriginalExtension();
+        $photo_name=$id.'.'.$extension;
+
+        Image::make($image)->save(base_path('public/uploads/category/'.$photo_name));
+        Category::find($id)->update([
+            'category_image'=>$photo_name,
         ]);
 
         return back()->with('success', 'Category added successful');

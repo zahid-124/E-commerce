@@ -134,7 +134,7 @@
                         <ul class="search-cart-wrapper d-flex">
                             <li class="search-tigger"><a href="javascript:void(0);"><i class="flaticon-search"></i></a></li>
                             <li>
-                                <a href="javascript:void(0);"><i class="flaticon-like"></i> <span>2</span></a>
+                                <a href="javascript:void(0);"><i class="flaticon-like"></i> <span>8</span></a>
                                 <ul class="cart-wrap dropdown_style">
                                     <li class="cart-items">
                                         <div class="cart-img">
@@ -165,44 +165,33 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>3</span></a>
+                                @php
+                                    $cart_products = App\Models\Cart::where('generated_cart_id', Cookie::get('random_id'))->get();
+                                    $subTotal=0;
+                                @endphp
+                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>{{ count($cart_products) }}</span></a>
                                 <ul class="cart-wrap dropdown_style">
+                                    @foreach ($cart_products as $cart_product)
+                                    @php
+                                        $total=App\Models\Product::find($cart_product->product_id)->product_price * $cart_product->product_quantity;
+                                        $subTotal+=$total;
+                                    @endphp
+
                                     <li class="cart-items">
                                         <div class="cart-img">
-                                            <img src="{{ asset('frontend/images/cart/1.jpg') }}" alt="">
+                                            <img style="width: 60px" src="{{ asset('uploads/products') }}/{{ App\Models\Product::find($cart_product->product_id)->product_image }}" alt="">
                                         </div>
                                         <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
+                                            <a href="cart.html">{{ App\Models\Product::find($cart_product->product_id)->product_name }}</a>
+                                            <span>QTY : {{ $cart_product->product_quantity }}</span>
+                                            <p>${{ $total }}</p>
+                                            <a href="{{ url('/deletefromcart') }}/{{ $cart_product->id }}"><i class="fa fa-times"></i></a>
                                         </div>
                                     </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('frontend/images/cart/3.jpg') }}" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('frontend/images/cart/2.jpg') }}" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
-                                    <li>
-                                        <button>Check Out</button>
+                                    @endforeach
+                                    <li>Subtotol: <span class="pull-right">${{ $subTotal }}</span></li>
+                                    <li class="pt-2">
+                                        <a href="{{ url('/cart') }}" class="btn btn-danger">Goto Cart</a>
                                     </li>
                                 </ul>
                             </li>

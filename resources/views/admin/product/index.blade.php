@@ -40,7 +40,7 @@
                         <form action="{{ url('subcategory/markdelete') }}" method="POST">
                         @csrf
 
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="table-layout: fixed; width: 100%;">
                             <tr>
                                 <th>Mark</th>
                                 <th>SL</th>
@@ -55,16 +55,16 @@
                             </tr>
                             @foreach($products as $product)
                                 <tr>
-                                    <td>
+                                    <td style="word-wrap: break-word;">
                                         <input type="checkbox" id="mark" name="alldelete[]" value="{{ $product->id }}">
                                     </td>
-                                    <td>{{$loop->index+1}}</td>
-                                    <td>{{ $product->product_name }}</td>
-                                    <td>{{ App\Models\Category::find($product->category_id)->category_name }}</td>
-                                    <td>{{ App\Models\Subcategory::find($product->subcategory_id)->subcategory_name }}</td>
-                                    <td>{{ $product->product_desc }}</td>
-                                    <td>{{ $product->product_price }}</td>
-                                    <td>{{ $product->product_quantity }}</td>
+                                    <td style="word-wrap: break-word;">{{$loop->index+1}}</td>
+                                    <td style="word-wrap: break-word;">{{ $product->product_name }}</td>
+                                    <td style="word-wrap: break-word;">{{ App\Models\Category::find($product->category_id)->category_name }}</td>
+                                    <td style="word-wrap: break-word;">{{ App\Models\Subcategory::find($product->subcategory_id)->subcategory_name }}</td>
+                                    <td class="text-truncate" style="max-width: 150px; word-wrap: break-word;">{{ $product->product_desc }}</td>
+                                    <td style="word-wrap: break-word;">{{ $product->product_price }}</td>
+                                    <td style="word-wrap: break-word;">{{ $product->product_quantity }}</td>
                                     {{-- <td>
                                         @if ($product->created_at->diffInDays(\Carbon\Carbon::today())>7)
                                             {{ $product->created_at->format('d:m:Y h:i A') }}
@@ -72,10 +72,10 @@
                                             {{ $product->created_at->diffForHumans() }}
                                         @endif
                                     </td> --}}
-                                    <td>
+                                    <td style="word-wrap: break-word;">
                                         <img width="50" src="{{ asset('uploads/products')}}/{{ $product->product_image }}" alt="">
                                     </td>
-                                    <td>
+                                    <td style="word-wrap: break-word;">
                                         <a href="{{ url('/product/delete') }}/{{ $product->id }}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>

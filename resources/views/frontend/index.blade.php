@@ -71,9 +71,9 @@
                 @foreach ($categories as $category)
                     <div class="featured-wrap">
                         <div class="featured-img">
-                            <img src="{{ asset('frontend/images/featured/6.jpg') }}" alt="">
+                            <img style="height: 250px; " src="{{ asset('uploads/category') }}/{{ $category->category_image }}" alt="">
                             <div class="featured-content">
-                                <a href="shop.html">{{ $category->category_name }}</a>
+                                <a href="{{ url('category/product') }}/{{ $category->id }}">{{ $category->category_name }}</a>
                             </div>
                         </div>
                     </div>

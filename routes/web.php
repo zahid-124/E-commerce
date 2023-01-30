@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyController;
@@ -20,6 +21,8 @@ Auth::routes();
 //Frontend
 Route::get('/', [FrontendController::class, 'main']);
 Route::get('/product/details/{product_id}', [FrontendController::class, 'product_details']);
+Route::get('/product/shop', [FrontendController::class, 'product_shop']);
+Route::get('/category/product/{id}', [FrontendController::class, 'category_product']);
 
 Route::get('/contact', function(){
     return view('contact');
@@ -53,3 +56,9 @@ Route::post('profile/edit',[ProfileController::class, 'edit']);
 //Products
 Route::get('/products',[ProductController::class, 'index']);
 Route::post('/product/insert',[ProductController::class, 'insert']);
+
+//Carts
+Route::post('/addtocart', [CartController::class, 'addtocart']);
+Route::get('/deletefromcart/{id}', [CartController::class, 'deletefromcart']);
+Route::get('/cart', [CartController::class, 'cart']);
+Route::post('/cart/update', [CartController::class, 'cartupdate']);

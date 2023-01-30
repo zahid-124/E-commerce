@@ -81,12 +81,25 @@
                         </ul>
                     </div>
                     <p>{{ $product_info->product_desc }}</p>
+                    @if ($product_info->product_quantity > 0)
+                    <form action="{{ url('/addtocart') }}" method="POST">
+                        @csrf
+                        <ul class="input-style">
+                            <input type="hidden" name="product_id" value="{{ $product_info->id }}">
+                            <li class="quantity cart-plus-minus">
+                                <input type="text" name="product_quantity" value="1" />
+                            </li>
+                            <li><button type="submit" class="ml-3 btn btn-danger">Add to Cart</button></li>
+                        </ul>
+                    </form>
+                    @else
                     <ul class="input-style">
                         <li class="quantity cart-plus-minus">
                             <input type="text" value="1" />
                         </li>
-                        <li><a href="cart.html">Add to Cart</a></li>
+                        <li><a class="text-white">Stock out</a></li>
                     </ul>
+                    @endif
                     <ul class="cetagory">
                         <li>Categories:</li>
                         <li><a href="#">{{ App\Models\Category::find($product_info->category_id)->category_name }}</a></li>
@@ -311,7 +324,7 @@
                     <div class="featured-product-content">
                         <div class="row">
                             <div class="col-7">
-                                <h3><a href="shop.html">{{ $related_product->product_name }}</a></h3>
+                                <h3><a href="{{ url('/product/details') }}/{{ $related_product->id }}">{{ $related_product->product_name }}</a></h3>
                                 <p>${{ $related_product->product_price }}</p>
                             </div>
                             <div class="col-5 text-right">
