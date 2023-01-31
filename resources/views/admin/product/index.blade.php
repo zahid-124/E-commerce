@@ -105,7 +105,7 @@
                                     <h6 class="alert alert-success">{{ session('success') }}</h6>
                                 @endif
                                 <label class="form-label">Category</label>
-                                <select name="category_id" class="form-control">
+                                <select required name="category_id" class="form-control">
                                     <option value="">--Select category--</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->category_name }}</option>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Subcategory</label>
-                                <select name="subcategory_id" class="form-control">
+                                <select required name="subcategory_id" class="form-control">
                                     <option value="">--Select subcategory--</option>
                                     @foreach ($subcategories as $subcategory)
                                         <option value="{{ $subcategory->id }}">{{ $subcategory->subcategory_name }}</option>
@@ -123,11 +123,11 @@
                             </div>
                             <div class="form-group mb-1">
                                 <label class="form-label">Product Name</label>
-                                <input type="text" name="product_name" class="form-control">
+                                <input required type="text" name="product_name" class="form-control">
                             </div>
                             <div class="form-group mb-1">
                                 <label class="form-label">Product Price</label>
-                                <input type="text" name="product_price" class="form-control">
+                                <input required type="text" name="product_price" class="form-control">
                             </div>
                             <div class="form-group mb-1">
                                 <label class="form-label">Product Description</label>
@@ -135,11 +135,11 @@
                             </div>
                             <div class="form-group mb-1">
                                 <label class="form-label">Product Quantity</label>
-                                <input type="text" name="product_quantity" class="form-control">
+                                <input required type="text" name="product_quantity" class="form-control">
                             </div>
                             <div class="form-group mb-1">
                                 <label class="form-label">Product image</label>
-                                <input type="file" name="product_image" class="form-control">
+                                <input required type="file" name="product_image" class="form-control">
                             </div>
                             <div class="form-group mb-1 text-center">
                                 <button type="submit" class="btn btn-primary">Submit</button>

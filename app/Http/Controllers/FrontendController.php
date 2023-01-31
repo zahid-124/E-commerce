@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -31,5 +33,17 @@ class FrontendController extends Controller
         $category_name = Category::find($category_id)->category_name;
         $category_products = Product::where('category_id', $category_id)->get();
         return view('frontend.category_product', compact('category_products', 'category_name'));
+    }
+
+    function checkout(){
+        return view('frontend.checkout');
+    }
+
+    function customer(){
+        if(!Auth::check()){
+            return redirect('/login');
+        }
+        $orders = Order::where('user_id', Auth::id())->get();
+        return view('admin.parts.customer', compact('orders'));
     }
 }

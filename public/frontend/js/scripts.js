@@ -8,9 +8,9 @@
 
     // toggle
     $('#toggle1').on("click", function() {
-        $('.create-account').slideToggle();
-    })
-    // toggle
+            $('.create-account').slideToggle();
+        })
+        // toggle
     $('#toggle2').on("click", function() {
         $('#open2').slideToggle();
     })
@@ -304,7 +304,7 @@
             LOAD MORE JQUERY
     ================================== */
     var list1 = $(".moreload");
-    var numToShow1 = 4;
+    var numToShow1 = 8;
     var button1 = $(".loadmore-btn");
     var numInList1 = list1.length;
 

@@ -9,6 +9,7 @@
   </div><!-- input-group -->
 
   <label class="sidebar-label">Navigation</label>
+
   <div class="sl-sideleft-menu">
     <a href="{{ url('/home') }}" class="sl-menu-link @yield('dashboard')">
       <div class="sl-menu-item">
@@ -16,6 +17,8 @@
         <span class="menu-item-label">Dashboard</span>
       </div><!-- menu-item -->
     </a><!-- sl-menu-link -->
+    @auth
+        @if (Auth::user()->role == 2)
     <a href="{{ url('/addcategory') }}" class="sl-menu-link @yield('category')">
       <div class="sl-menu-item">
         <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
@@ -34,21 +37,15 @@
         <span class="menu-item-label">Products</span>
       </div><!-- menu-item -->
     </a><!-- sl-menu-link -->
-
-    {{-- <a href="#" class="sl-menu-link @yield('charts')">
-      <div class="sl-menu-item">
-        <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-        <span class="menu-item-label">Charts</span>
-        <i class="menu-item-arrow fa fa-angle-down"></i>
-      </div><!-- menu-item -->
-    </a><!-- sl-menu-link -->
-    <ul class="sl-menu-sub nav flex-column">
-      <li class="nav-item"><a href="chart-morris.html" class="nav-link">Morris Charts</a></li>
-      <li class="nav-item"><a href="chart-flot.html" class="nav-link">Flot Charts</a></li>
-      <li class="nav-item"><a href="chart-chartjs.html" class="nav-link">Chart JS</a></li>
-      <li class="nav-item"><a href="chart-rickshaw.html" class="nav-link">Rickshaw</a></li>
-      <li class="nav-item"><a href="chart-sparkline.html" class="nav-link">Sparkline</a></li>
-    </ul> --}}
+    @elseif (Auth::user()->role == 1)
+    <a href="{{ url('/customer') }}" class="sl-menu-link @yield('customer')">
+        <div class="sl-menu-item">
+          <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+          <span class="menu-item-label">Orders</span>
+        </div><!-- menu-item -->
+      </a><!-- sl-menu-link -->
+    @endif
+    @endauth
   </div><!-- sl-sideleft-menu -->
 
   <br>
@@ -104,7 +101,7 @@
 </div><!-- sl-header -->
 <!-- ########## END: HEAD PANEL ########## -->
 
-<!-- ########## START: RIGHT PANEL ########## -->
+{{-- <!-- ########## START: RIGHT PANEL ########## -->
 <div class="sl-sideright">
   <ul class="nav nav-tabs nav-fill sidebar-tabs" role="tablist">
     <li class="nav-item">
@@ -113,9 +110,9 @@
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" role="tab" href="#notifications">Notifications (8)</a>
     </li>
-  </ul><!-- sidebar-tabs -->
+  </ul><!-- sidebar-tabs --> --}}
 
-  <!-- Tab panes -->
+  {{-- <!-- Tab panes -->
   <div class="tab-content">
     <div class="tab-pane pos-absolute a-0 mg-t-60 active" id="messages" role="tabpanel">
       <div class="media-list">
@@ -255,7 +252,7 @@
           </div><!-- media -->
         </a>
       </div><!-- media-list -->
-    </div><!-- #notifications -->
+    </div><!-- #notifications --> --}}
 
   </div><!-- tab-content -->
 </div><!-- sl-sideright -->

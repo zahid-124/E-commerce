@@ -9,7 +9,7 @@
                 <div class="breadcumb-wrap text-center">
                     <h2>Shop Page</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ url('/') }}">Home</a></li>
                         <li><span>Shop</span></li>
                     </ul>
                 </div>
@@ -319,7 +319,7 @@
             <div class="col-lg-3 col-sm-6 col-12">
                 <div class="featured-product-wrap">
                     <div class="featured-product-img">
-                        <img src="{{ asset('uploads/products') }}/{{ $related_product->product_image }}" alt="">
+                        <img style="height: 250px" src="{{ asset('uploads/products') }}/{{ $related_product->product_image }}" alt="">
                     </div>
                     <div class="featured-product-content">
                         <div class="row">

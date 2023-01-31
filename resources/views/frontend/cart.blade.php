@@ -9,7 +9,7 @@
                 <div class="breadcumb-wrap text-center">
                     <h2>Shopping Cart</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ url('/') }}">Home</a></li>
                         <li><span>Shopping Cart</span></li>
                     </ul>
                 </div>
@@ -21,6 +21,15 @@
 <!-- cart-area start -->
 <div class="cart-area ptb-100">
     <div class="container">
+        <div class="row">
+            <div class="col-lg-6 m-auto">
+                @if (session('order'))
+                   <div class="alert alert-success py-2"> <h3>{{ session('order') }}</h3></div>
+                   <div class="alert alert-success py-2"> <h5><a href="{{ url('/') }}">Continue Shopping</a></h5></div>
+                @endif
+            </div>
+        </div>
+        @if (count($cart_products) != 0)
         <div class="row">
             <div class="col-12">
                 <form action="{{ url('/cart/update') }}" method="POST">
@@ -77,14 +86,14 @@
                                         <button type="submit">Update Cart</button>
                                     </li>
                                 </form>
-                                    <li><a href="shop.html">Continue Shopping</a></li>
+                                    <li><a href="{{ url('/') }}">Continue Shopping</a></li>
                                 </ul>
-                                <h3>Cupon</h3>
+                                {{-- <h3>Cupon</h3>
                                 <p>Enter Your Cupon Code if You Have One</p>
                                 <div class="cupon-wrap">
                                     <input type="text" placeholder="Cupon Code">
                                     <button>Apply Cupon</button>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="col-xl-3 offset-xl-5 col-lg-4 offset-lg-3 col-md-6">
@@ -92,13 +101,13 @@
                                 <h3>Cart Totals</h3>
                                 <ul>
                                     <li><span class="pull-left"> Total </span> ${{ $total }}</li>
-                                    <li><span class="pull-left"> Discout </span> $180.00</li>
+                                    {{-- <li><span class="pull-left"> Discout </span> $180.00</li> --}}
                                     <li><span class="pull-left">Subtotal </span>${{ $total }}</li>
                                 </ul>
                                 @if ($outOfStock)
                                 <a class="btn btn-danger text-white">Product is out of Stock</a>
                                 @else
-                                <a href="checkout.html">Proceed to Checkout</a>
+                                <a href="{{ url('/checkout') }}">Proceed to Checkout</a>
                                 @endif
 
                             </div>
@@ -106,6 +115,15 @@
                     </div>
             </div>
         </div>
+        @else
+        <div class="row">
+            <div class="col-lg-6 m-auto">
+                @if (!session('order'))
+                   <div class="alert alert-success py-2"> <h5>Cart is Empty. <br><a href="{{ url('/') }}">Continue Shopping</a></h5></div>
+                @endif
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 <!-- cart-area end -->

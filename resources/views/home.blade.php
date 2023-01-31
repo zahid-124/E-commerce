@@ -21,9 +21,11 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">Welcome, {{ App\Models\User::find(Auth::id())->name }}
+                    @if (Auth::user()->role == 2)
                     <span class="">Total User: {{ $users->count() }}</span>
+                    @endif
                 </div>
-
+                @if (Auth::user()->role == 2)
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -50,6 +52,7 @@
 
                     </table>
                 </div>
+                @endif
             </div>
         </div>
     </div>

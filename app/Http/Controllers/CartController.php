@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderDetails;
+use App\Models\OrderProductDetails;
+use App\Models\Product;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -44,6 +49,57 @@ class CartController extends Controller
     }
 
     function cartupdate(Request $request){
-        print_r($request->all());
+        foreach($request->product_quantity as $id=>$quantity){
+            Cart::find($id)->update([
+                'product_quantity' => $quantity,
+            ]);
+        }
+        return back();
+    }
+
+    function order(Request $request){
+        $order_id = Order::insertGetId([
+            'user_id' => Auth::id(),
+            'total' => $request->amount,
+            'discount' => '0',
+            'subtotal' => session('totalBill'),
+            'payment_method' => $request->payment,
+            'created_at' => Carbon::now(),
+        ]);
+
+        OrderDetails::insert([
+            'order_id' => $order_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'address' => $request->address,
+            'notes' => $request->notes,
+            'created_at' => Carbon::now(),
+        ]);
+
+        $cart_products = Cart::where('generated_cart_id', Cookie::get('random_id'))->get();
+        foreach($cart_products as $product){
+            $product_name = Product::find($product->product_id)->product_name;
+            $product_price = Product::find($product->product_id)->product_price;
+
+            OrderProductDetails::insert([
+                'product_name' => $product_name,
+                'product_price' => $product_price,
+                'order_id' => $order_id,
+                'product_quantity' => $product->product_quantity,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+
+        if($request->payment == 2){
+            Cart::where('generated_cart_id', Cookie::get('random_id'))->delete();
+        }
+        else{
+            Cart::where('generated_cart_id', Cookie::get('random_id'))->delete();
+            session(['total' => $request->amount]);
+            return redirect('/payment/online');
+        }
+
+        return redirect('/cart')->with('order', 'Your Order successfully Placed');
     }
 }

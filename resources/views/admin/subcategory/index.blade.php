@@ -161,7 +161,7 @@
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label">Category List</label>
-                                <select class="form-control" name="category_id">
+                                <select required class="form-control" name="category_id">
                                     <option value="">--select--</option>
                                     @foreach ($categories as $category)
                                         <option @if (old('category_id')==$category->id)
@@ -177,7 +177,7 @@
                             @enderror
                             <div class="mb-3">
                                 <label class="form-label">Subcategory Name</label>
-                                <input value="{{ old('subcategory_name') }}" type="text" class="form-control" name="subcategory_name">
+                                <input required value="{{ old('subcategory_name') }}" type="text" class="form-control" name="subcategory_name">
                             </div>
                             @error('subcategory_name')
                                 <div class="alert alert-danger">

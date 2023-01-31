@@ -9,7 +9,7 @@
                 <div class="breadcumb-wrap text-center">
                     <h2>{{ $category_name }}</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ url('/') }}">Home</a></li>
                         <li><span>Shop</span></li>
                     </ul>
                 </div>

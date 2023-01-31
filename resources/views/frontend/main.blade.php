@@ -32,10 +32,10 @@
 </head>
 
 <body>
-    <!--Start Preloader-->
+    {{-- <!--Start Preloader-->
     <div class="preloader-wrap">
         <div class="spinner"></div>
-    </div>
+    </div> --}}
     <!-- search-form here -->
     <div class="search-area flex-style">
         <span class="closebar">Close</span>
@@ -69,14 +69,13 @@
                             <li>
                                 <a href="javascript:void(0);"><i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown_style">
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="wishlist.html">wishlist</a></li>
+                                    <li><a href="{{ url('/login') }}">Login</a></li>
+                                    <li><a href="{{ url('/registration') }}">Register</a></li>
+                                    <li><a href="{{ url('/cart') }}">Cart</a></li>
+                                    <li><a href="{{ url('/checkout') }}">Checkout</a></li>
                                 </ul>
                             </li>
-                            <li><a href="register.html"> Login/Register </a></li>
+                            <li><a href="{{ url('/login') }}"> Login/Register </a></li>
                         </ul>
                     </div>
                 </div>
@@ -87,83 +86,40 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-7 col-sm-6 col-6">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="{{ url('/') }}">
                         {{-- <img src="{{ asset('frontend/images/logo.png') }}" alt=""> --}}
-                        <h3 style="color: rgb(255, 0, 234)">Zahid Hasan</h3>
+                        <h3 style="color: rgb(255, 0, 234)">ELECTRONIX HOME</h3>
                         </a>
                         </div>
                     </div>
                     <div class="col-lg-7 d-none d-lg-block">
                         <nav class="mainmenu">
                             <ul class="d-flex">
-                                <li class="active"><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
+                                <li class="active"><a href="{{ url('/') }}">Home</a></li>
+                                <li><a href="#">About</a></li>
                                 <li>
                                     <a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown_style">
-                                        <li><a href="shop.html">Shop Page</a></li>
-                                        <li><a href="single-product.html">Product Details</a></li>
-                                        <li><a href="cart.html">Shopping cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">Pages <i class="fa fa-angle-down"></i></a>
-                                    <ul class="dropdown_style">
-                                        <li><a href="about.html">About Page</a></li>
-                                        <li><a href="single-product.html">Product Details</a></li>
-                                        <li><a href="cart.html">Shopping cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
+                                        <li><a href="{{ url('/product/shop') }}">Shop Page</a></li>
+                                        <li><a href="{{ url('/cart') }}">Shopping cart</a></li>
+                                        <li><a href="{{ url('/checkout') }}">Checkout</a></li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0);">Blog <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown_style">
-                                        <li><a href="blog.html">blog Page</a></li>
-                                        <li><a href="blog-details.html">blog Details</a></li>
+                                        <li><a href="#">blog Page</a></li>
+                                        <li><a href="#">blog Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
                     <div class="col-md-4 col-lg-2 col-sm-5 col-4">
                         <ul class="search-cart-wrapper d-flex">
                             <li class="search-tigger"><a href="javascript:void(0);"><i class="flaticon-search"></i></a></li>
-                            <li>
-                                <a href="javascript:void(0);"><i class="flaticon-like"></i> <span>8</span></a>
-                                <ul class="cart-wrap dropdown_style">
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('frontend/images/cart/1.jpg') }}" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('frontend/images/cart/3.jpg') }}" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
-                                    <li>
-                                        <button>Check Out</button>
-                                    </li>
-                                </ul>
-                            </li>
+
                             <li>
                                 @php
                                     $cart_products = App\Models\Cart::where('generated_cart_id', Cookie::get('random_id'))->get();
@@ -193,6 +149,9 @@
                                     <li class="pt-2">
                                         <a href="{{ url('/cart') }}" class="btn btn-danger">Goto Cart</a>
                                     </li>
+                                    @php
+                                        session()->put('totalBill',$subTotal)
+                                    @endphp
                                 </ul>
                             </li>
                         </ul>
