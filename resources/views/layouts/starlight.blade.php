@@ -1,7 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -38,9 +38,10 @@
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('starlight_dashboard/css/starlight.css') }}">
-  </head>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+</head>
 
-  <body>
+<body>
 
     @yield('content')
 
@@ -48,8 +49,10 @@
     <script src="{{ asset('starlight_dashboard/lib/popper.js/popper.js') }}"></script>
     <script src="{{ asset('starlight_dashboard/lib/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('starlight_dashboard/js/starlight.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 
     @yield('footer_script')
 
-  </body>
+</body>
+
 </html>

@@ -36,6 +36,9 @@ class FrontendController extends Controller
     }
 
     function checkout(){
+        if(!Auth::check()){
+            return redirect()->back()->with('login', 'Login first to checkout');
+        }
         return view('frontend.checkout');
     }
 
