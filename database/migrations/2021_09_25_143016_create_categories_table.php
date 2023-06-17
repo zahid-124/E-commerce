@@ -18,6 +18,8 @@ class CreateCategoriesTable extends Migration
             $table->string('category_name',100);
             $table->integer('added_by');
             $table->string('category_image', 50)->nullable;
+            $table->string('category_image', 50)->nullable;
+            $table->softDeletes();
             $table->timestamps();
         });
     }
