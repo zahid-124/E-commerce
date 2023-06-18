@@ -18,6 +18,7 @@
 - Download Codes
 - Run command "composer update"
 - Run command "php artisan migrate"
+- Run command "php artisan key:generate"
 - Run command "php artisan optimize:clear"
 - Run command "php artisan serve"
 - Open browser and go to your domain
