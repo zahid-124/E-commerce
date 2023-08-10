@@ -2,7 +2,7 @@
 
 ### Build and Developed by Zahid Hasan
 
-### Name: E-commerce Platform:
+### Name: E-commerce Platform
 
 - Built a feature-rich e-commerce platform using Laravel.
 - Implemented product catalog, shopping cart, user authentication, and payment integration.
